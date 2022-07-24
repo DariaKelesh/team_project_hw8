@@ -24,3 +24,21 @@ function initForm() {
     });
   }
 }
+refs.form.addEventListener('submit', handleSubmit);
+function handleSubmit(event) {
+  event.preventDefault();
+  const { email, message, name } = event.target.elements;
+
+  if (email.value === '' || name.value === '' || message.value === '') {
+    console.log('Заповніть всі поля');
+    return;
+  }
+  const formData = new FormData(refs.form);
+  const userData = {};
+  formData.forEach((value, name) => {
+    userData[name] = value;
+  });
+  console.log(userData);
+  event.target.reset();
+  storage.remove(LOCALSTORAGE_KEY);
+}
