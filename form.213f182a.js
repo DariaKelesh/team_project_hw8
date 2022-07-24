@@ -1,0 +1,2 @@
+var e={save:(e,t)=>{try{const r=JSON.stringify(t);localStorage.setItem(e,r)}catch(e){console.error("Set state error: ",e.message)}},load:e=>{try{const t=localStorage.getItem(e);return null===t?void 0:JSON.parse(t)}catch(e){console.error("Get state error: ",e.message)}}};({form:document.querySelector(".js-contact-form")}).form.addEventListener("input",(function(r){const{name:o,value:a}=r.target;t[o]=a,e.save("form-key",t)}));const t={};
+//# sourceMappingURL=form.213f182a.js.map
