@@ -1,2 +1,0 @@
-!function(){var e={save:function(e,r){try{var t=JSON.stringify(r);localStorage.setItem(e,t)}catch(e){console.error("Set state error: ",e.message)}},load:function(e){try{var r=localStorage.getItem(e);return null===r?void 0:JSON.parse(r)}catch(e){console.error("Get state error: ",e.message)}}};({form:document.querySelector(".js-contact-form")}).form.addEventListener("input",(function(t){var o=t.target,a=o.name,n=o.value;r[a]=n,e.save("form-key",r)}));var r={}}();
-//# sourceMappingURL=form.6f4a7d21.js.map
