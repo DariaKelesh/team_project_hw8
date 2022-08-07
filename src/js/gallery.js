@@ -34,8 +34,12 @@ const pagination = new Pagination(container, options);
 const page = pagination.getCurrentPage();
 console.log(page);
 unsplashApi.getPopularImages(page).then(({ total, total_pages, results }) => {
+  if (results.length === 0) {
+    container.classList.add('is-hidden');
+    return;
+  }
   pagination.reset(total);
-
+  container.classList.remove('is-hidden');
   const markUp = createGalleryCards(results);
   listRef.insertAdjacentHTML('beforeend', markUp);
 });
@@ -70,8 +74,12 @@ function handleSubmit(evt) {
   unsplashApi
     .getImagesBuyQuery(page)
     .then(({ total, total_pages, results }) => {
+       if (results.length === 0) {
+    container.classList.add('is-hidden');
+    return;
+      }
       pagination.reset(total);
-
+       container.classList.remove('is-hidden');
       const markUp = createGalleryCards(results);
 
         listRef.insertAdjacentHTML('beforeend', markUp);
