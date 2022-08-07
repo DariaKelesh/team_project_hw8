@@ -12,7 +12,23 @@ const options = {
   totalItems: 0,
   itemsPerPage: 10,
   visiblePages: 5,
-  page: 1,
+    page: 1,
+  template: {
+         page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+         currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+         moveButton:
+             '<a href="#" class="tui-page-btn tui-{{type}}">' +
+                 '<span class="tui-ico-{{type}}">{{type}}</span>' +
+             '</a>',
+         disabledMoveButton:
+             '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+                 '<span class="tui-ico-{{type}}">{{type}}</span>' +
+             '</span>',
+         moreButton:
+             '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+                 '<span class="tui-ico-ellip">...</span>' +
+             '</a>'
+     }
 };
 const pagination = new Pagination(container, options);
 const page = pagination.getCurrentPage();
@@ -23,16 +39,17 @@ unsplashApi.getPopularImages(page).then(({ total, total_pages, results }) => {
   const markUp = createGalleryCards(results);
   listRef.insertAdjacentHTML('beforeend', markUp);
 });
-pagination.on('afterMove', event => {
-  const currentPage = event.page;
-
-  unsplashApi
-    .getPopularImages(currentPage)
-    .then(({ total, total_pages, results }) => {
-      const markUp = createGalleryCards(results);
-      listRef.insertAdjacentHTML('beforeend', markUp);
-    });
-});
+const popular = event => {
+    const currentPage = event.page;
+  
+    unsplashApi
+      .getPopularImages(currentPage)
+      .then(({ total, total_pages, results }) => {
+        const markUp = createGalleryCards(results);
+        listRef.insertAdjacentHTML('beforeend', markUp);
+      });
+  }
+pagination.on('afterMove', popular );
 
 formRef.addEventListener('submit', handleSubmit);
 
@@ -44,7 +61,10 @@ function handleSubmit(evt) {
   if (!searchValue) {
     Notify.failure('Введіть корректне значення');
     return;
-  }
+    }
+    pagination.off("afterMove", popular);
+    pagination.off("afterMove", createByQuery)
+
   listRef.innerHTML = '';
   unsplashApi.query = searchValue;
   unsplashApi
@@ -54,6 +74,18 @@ function handleSubmit(evt) {
 
       const markUp = createGalleryCards(results);
 
-      listRef.insertAdjacentHTML('beforeend', markUp);
+        listRef.insertAdjacentHTML('beforeend', markUp);
+        pagination.on("afterMove", createByQuery)
     });
+}
+
+function createByQuery(event) {
+    const currentPage = event.page;
+  
+    unsplashApi
+      .getImagesBuyQuery(currentPage)
+      .then(({ total, total_pages, results }) => {
+        const markUp = createGalleryCards(results);
+        listRef.insertAdjacentHTML('beforeend', markUp);
+      });
 }
