@@ -18,7 +18,6 @@
   border-radius: 2px;
 }
 
-
 .example .background {
   height: 240px;
   // ❗️❗️❗️ The path to images from a SASS file
@@ -29,39 +28,39 @@
 }
 
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    width: 600px;
-    padding: 40px;
-    margin: 0 auto;
-    box-shadow: 0 10px 10px 0 #cccccc;
-  }
-  
-  .contact-form-input {
-    height: 40px;
-    padding-left: 15px;
-    border: 1px solid #303030;
-    margin-bottom: 20px;
-  }
-  
-  .contact-form-message {
-    height: 120px;
-    padding: 15px;
-    border: 1px solid #303030;
-    margin-bottom: 20px;
-    resize: none;
-  }
-  
-  .contact-form-submit {
-    padding: 10px 20px;
-    background-color: transparent;
-    border: 1px solid #303030;
-    border-radius: 4px;
-    cursor: pointer;
-    align-self: center;
-    transition: transform 250ms linear;
-  }
-  .contact-form-submit:hover,
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  padding: 40px;
+  margin: 0 auto;
+  box-shadow: 0 10px 10px 0 #cccccc;
+}
+
+.contact-form-input {
+  height: 40px;
+  padding-left: 15px;
+  border: 1px solid #303030;
+  margin-bottom: 20px;
+}
+
+.contact-form-message {
+  height: 120px;
+  padding: 15px;
+  border: 1px solid #303030;
+  margin-bottom: 20px;
+  resize: none;
+}
+
+.contact-form-submit {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 1px solid #303030;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+  transition: transform 250ms linear;
+}
+.contact-form-submit:hover,
 .contact-form-submit:focus {
   transform: scale(1.05);
 }
@@ -124,4 +123,9 @@
   height: 100%;
   max-width: unset;
   object-fit: cover;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
